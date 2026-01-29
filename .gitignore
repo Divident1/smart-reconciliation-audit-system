@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment
+.env
+server/.env
+client/.env
+
+# Build outputs
+dist/
+client/dist/
+build/
+client/build/
+
+# Uploads & Logs
+server/uploads/*
+!server/uploads/.gitkeep
+*.log
+
+# System
+.DS_Store
+.idea/
+.vscode/
