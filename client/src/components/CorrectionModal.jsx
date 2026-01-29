@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import API from '../api';
 import { X } from 'lucide-react';
 
 const CorrectionModal = ({ record, onClose, onUpdate, token }) => {
@@ -12,7 +12,7 @@ const CorrectionModal = ({ record, onClose, onUpdate, token }) => {
         e.preventDefault();
         setUpdating(true);
         try {
-            await axios.put(`/api/reconciliation/record/${record.recordId._id}`, 
+            await API.put(`/api/reconciliation/record/${record.recordId._id}`, 
                 { amount, referenceNumber, notes },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
