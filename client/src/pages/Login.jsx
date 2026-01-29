@@ -9,6 +9,21 @@ const Login = () => {
     const { login, user, loading } = useAuth();
     const navigate = useNavigate();
     const [error, setError] = useState('');
+    const [apiOnline, setApiOnline] = useState(null);
+
+    useState(() => {
+        const checkApi = async () => {
+            try {
+                await API.get('/');
+                setApiOnline(true);
+            } catch (err) {
+                console.error("Connectivity Error:", err);
+                setApiOnline(false);
+                setError(`Connection Error: ${err.message}`);
+            }
+        };
+        checkApi();
+    }, []);
 
     if (user) {
         return <Navigate to="/dashboard" replace />;
@@ -47,6 +62,12 @@ const Login = () => {
                     </div>
                     <h1 className="text-2xl font-bold">Welcome Back</h1>
                     <p className="text-text-muted mt-2">Sign in to SmartReco Portal</p>
+                    
+                    <div className="mt-3 flex justify-center">
+                        {apiOnline === true && <span className="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider flex items-center gap-1">✨ Server Online</span>}
+                        {apiOnline === false && <span className="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider flex items-center gap-1">⚠️ Server Offline</span>}
+                        {apiOnline === null && <span className="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider flex items-center gap-1">⏳ Connecting...</span>}
+                    </div>
                 </div>
 
                 {error && (
