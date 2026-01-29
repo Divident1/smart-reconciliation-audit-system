@@ -13,8 +13,10 @@ const generateToken = (id) => {
 // @access  Public
 const authUser = asyncHandler(async (req, res) => {
     const { username, password } = req.body;
+    console.log(`LOGIN ATTEMPT: ${username}`);
 
     const user = await User.findOne({ username });
+    if (!user) console.log(`LOGIN FAILED: ${username} not found`);
 
     if (user && (await user.matchPassword(password))) {
         res.json({
