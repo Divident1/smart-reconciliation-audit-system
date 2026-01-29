@@ -59,7 +59,7 @@ const Dashboard = () => {
         <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-2xl font-bold">Dashboard <span className="text-[10px] font-normal text-text-muted bg-slate-100 px-2 py-0.5 rounded ml-2">v2.1</span></h2>
+                    <h2 className="text-2xl font-bold">Dashboard <span className="text-[10px] font-normal text-text-muted bg-slate-100 px-2 py-0.5 rounded ml-2"></span></h2>
                     <p className="text-text-muted">Overview of your reconciliation status</p>
                 </div>
                 <div className="flex gap-2">
