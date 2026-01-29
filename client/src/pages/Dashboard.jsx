@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import API from '../api';
 import { useAuth } from '../context/AuthContext';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell 
@@ -27,7 +27,7 @@ const Dashboard = () => {
             if (filters.status) params.append('status', filters.status);
             if (filters.userId) params.append('userId', filters.userId);
 
-            const { data } = await axios.get(`/api/dashboard/stats?${params.toString()}`, {
+            const { data } = await API.get(`/api/dashboard/stats?${params.toString()}`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             setStats(data);

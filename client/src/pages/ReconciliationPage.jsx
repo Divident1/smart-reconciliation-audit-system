@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../api';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { CheckCircle, AlertCircle, AlertTriangle, Edit2, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -20,7 +20,7 @@ const ReconciliationPage = () => {
     useEffect(() => {
         const fetchJobs = async () => {
             try {
-                const { data } = await axios.get('/api/upload', {
+                const { data } = await API.get('/api/upload', {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 setJobs(data);
@@ -42,7 +42,7 @@ const ReconciliationPage = () => {
     const fetchResults = async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get(`/api/reconciliation/${selectedJob}?pageNumber=${page}`, {
+            const { data } = await API.get(`/api/reconciliation/${selectedJob}?pageNumber=${page}`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             setResults(data.results);
@@ -56,7 +56,7 @@ const ReconciliationPage = () => {
 
     const fetchStats = async () => {
          try {
-            const { data } = await axios.get(`/api/reconciliation/${selectedJob}/stats`, {
+            const { data } = await API.get(`/api/reconciliation/${selectedJob}/stats`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             setStats(data);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../api';
 import { useAuth } from '../context/AuthContext';
 import { UploadCloud, File, AlertCircle, CheckCircle, Loader } from 'lucide-react';
 
@@ -22,7 +22,7 @@ const UploadPage = () => {
 
     const fetchJobs = async () => {
         try {
-            const { data } = await axios.get('/api/upload', {
+            const { data } = await API.get('/api/upload', {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             setJobs(data);
@@ -83,7 +83,7 @@ const UploadPage = () => {
         setMessage('');
 
         try {
-            await axios.post('/api/upload', formData, {
+            await API.post('/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${user.token}`

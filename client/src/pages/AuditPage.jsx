@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../api';
 import { useAuth } from '../context/AuthContext';
 import { Clock, User as UserIcon, ArrowRight } from 'lucide-react';
 
@@ -42,7 +42,7 @@ const AuditPage = () => {
         if (!id) return;
         setLoading(true);
         try {
-            const { data } = await axios.get(`/api/audit/${id}`, {
+            const { data } = await API.get(`/api/audit/${id}`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             setLogs(data);
